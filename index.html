@@ -17,15 +17,52 @@
 </head>
 
 <body>
+
     <div class="row">
         <div class='col s3'></div>
+
+        <!-- Edit me -->
         <div class="col s6 card-panel" id="app">
 
             <p>{{ message }}</p>
+            <pre>{{ sampleConfig }}</pre>
+            <hr/>
+
+            <table class="table">
+                <thead></thead>
+                <tbody>
+                    <tr v-for='param in configToRender'>
+                        <td>{{ param.name }}</td>
+                        <td>
+                            <span v-if="param.type == 'boolean'">
+                                <input type="checkbox" id="checkbox" v-model="sampleConfig.param1">
+                                <label for="checkbox">{{ sampleConfig.param1 }}</label>
+                            </span>
+                            <span v-if="param.type == 'string'">
+                                <input v-model="sampleConfig.param2">
+                            </span>
+                            <span v-if="param.type == 'number'">
+                                <input v-model.number="sampleConfig.param3" type="number">
+                            </span>
+                            <span v-if="param.type == 'object'">
+                                {{ param.value }}
+                            </span>
+                        </td>
+                        <td>{{ param.type }}</td>
+                        <td>
+                        </td>
+                    </tr>
+                </tbody>
+                </table>
+
+            <a class='btn btn-small' v-on:click='renderConfig'>render</a>
+
 
         </div>
+
         <div class='col s3'></div>
     </div>
+
     <script src="js/script.js"></script>
 </body>
 
