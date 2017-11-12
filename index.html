@@ -12,7 +12,7 @@
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
     <!-- own style -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 
 </head>
 
@@ -27,48 +27,9 @@
             <p>{{ message }}</p>
             <pre>{{ sampleConfig }}</pre>
             <hr/>
-
-            <table class="table small-table">
-                <thead></thead>
-                <tbody>
-                    <tr v-for='(value, key) in sampleConfig'>
-                        <td>{{ key }}</td>
-                        <td>
-                            <span v-if="typeof sampleConfig[key] == 'boolean'">
-                                <input type="checkbox" id="checkbox" v-model="sampleConfig[key]">
-                                <label for="checkbox">{{ sampleConfig[key] }}</label>
-                            </span>
-                            <span v-if="typeof sampleConfig[key] == 'string'">
-                                <input v-model="sampleConfig[key]">
-                            </span>
-                            <span v-if="typeof sampleConfig[key] == 'number'">
-                                <input v-model.number="sampleConfig[key]" type="number">
-                            </span>
-                            <span v-if="typeof sampleConfig[key] == 'object'">
-                                <!-- {{ sampleConfig[key] }} -->
-
-                                <table>
-                                    <tr v-for="(innerValue, innerKey) in sampleConfig[key]">
-                                        <td>
-                                            {{ innerKey}}
-                                        </td>
-                                        <td>
-                                            <span v-if="typeof sampleConfig[key][innerKey] == 'number'">
-                                                <input v-model.number="sampleConfig[key][innerKey]" type="number">
-                                            </span>
-
-                                        </td>
-                                    </tr>
-                                </table>
-                            </span>
-                        </td>
-                        <td>{{ typeof sampleConfig[key] }}</td>
-                    </tr>
-                </tbody>
-                </table>
+            <config-editor :config=sampleConfig></config-editor>
 
             <a class='btn btn-small' v-on:click='renderConfig'>render</a>
-
 
         </div>
 
