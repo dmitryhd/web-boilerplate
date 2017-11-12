@@ -28,29 +28,41 @@
             <pre>{{ sampleConfig }}</pre>
             <hr/>
 
-            <table class="table">
+            <table class="table small-table">
                 <thead></thead>
                 <tbody>
-                    <tr v-for='param in configToRender'>
-                        <td>{{ param.name }}</td>
+                    <tr v-for='(value, key) in sampleConfig'>
+                        <td>{{ key }}</td>
                         <td>
-                            <span v-if="param.type == 'boolean'">
-                                <input type="checkbox" id="checkbox" v-model="sampleConfig.param1">
-                                <label for="checkbox">{{ sampleConfig.param1 }}</label>
+                            <span v-if="typeof sampleConfig[key] == 'boolean'">
+                                <input type="checkbox" id="checkbox" v-model="sampleConfig[key]">
+                                <label for="checkbox">{{ sampleConfig[key] }}</label>
                             </span>
-                            <span v-if="param.type == 'string'">
-                                <input v-model="sampleConfig.param2">
+                            <span v-if="typeof sampleConfig[key] == 'string'">
+                                <input v-model="sampleConfig[key]">
                             </span>
-                            <span v-if="param.type == 'number'">
-                                <input v-model.number="sampleConfig.param3" type="number">
+                            <span v-if="typeof sampleConfig[key] == 'number'">
+                                <input v-model.number="sampleConfig[key]" type="number">
                             </span>
-                            <span v-if="param.type == 'object'">
-                                {{ param.value }}
+                            <span v-if="typeof sampleConfig[key] == 'object'">
+                                <!-- {{ sampleConfig[key] }} -->
+
+                                <table>
+                                    <tr v-for="(innerValue, innerKey) in sampleConfig[key]">
+                                        <td>
+                                            {{ innerKey}}
+                                        </td>
+                                        <td>
+                                            <span v-if="typeof sampleConfig[key][innerKey] == 'number'">
+                                                <input v-model.number="sampleConfig[key][innerKey]" type="number">
+                                            </span>
+
+                                        </td>
+                                    </tr>
+                                </table>
                             </span>
                         </td>
-                        <td>{{ param.type }}</td>
-                        <td>
-                        </td>
+                        <td>{{ typeof sampleConfig[key] }}</td>
                     </tr>
                 </tbody>
                 </table>
