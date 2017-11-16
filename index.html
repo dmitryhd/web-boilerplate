@@ -25,15 +25,26 @@
         <div class="col s10 card-panel" id="app">
 
             <div class='col s6'>
-                <config-editor :config=sampleConfig></config-editor>
+                bad:
+                <ul>
+                    <li v-for='word in badList'>{{word}}</li>
+                </ul>
+
+                good:
+                <ul>
+                    <li v-for='word in goodList'>{{word}}</li>
+                </ul>
+
             </div>
             <div class='col s6'>
-                <p>{{ message }}</p>
-                <pre>{{ sampleConfig }}</pre>
-                <hr/>
+                <ul>
+                    <li v-for='word in initialWords'>
+                        {{ word.word }}
+                        <a href='#' v-on:click="modeWordTo(word.id, 'good')">good</a>
+                        <a href='#' v-on:click="modeWordTo(word.id, 'bad')">bad</a>
+                    </li>
+                </ul>
             </div>
-
-            <a class='btn btn-small' v-on:click='renderConfig'>render</a>
 
         </div>
 
